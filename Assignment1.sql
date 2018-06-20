@@ -9,6 +9,7 @@ SELECT f.title AS PG13_rated_comedy_movies
 	WHERE c.name = 'Comedy' AND f.rating = 'PG-13';
 
 
+
 \! echo "Top 3 rented Horror movies."
 SELECT f.title AS top_3_rented_horror_movies , f.film_id
 	FROM film f 
@@ -65,7 +66,7 @@ SELECT DISTINCT Concat(cust.first_name, ' ', cust.last_name) AS customers_from_C
 			ON city.country_id = cnty.country_id
 	WHERE cnty.country = 'Canada' AND a.first_name = 'NICK' AND a.last_name = 'WAHLBERG';
 
-\! echo "Number of movies in which SEAN WILLIAMS acted."
+\! echo "Number of movies in which SEAN WILLIAMS has acted."
 SELECT Count(fa.actor_id) AS number_of_movies_in_which_“SEAN_WILLIAMS”_acted
 	FROM film f 
 		JOIN film_actor fa 
