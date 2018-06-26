@@ -2,42 +2,31 @@ CREATE DATABASE IRCTC1;
 USE IRCTC1 ;
 
 CREATE TABLE IF NOT EXISTS train (
-train_id INT NOT NULL,
+train_id INT NOT NULL PRIMARY KEY ,
 train_name VARCHAR(45) NOT NULL,
 source VARCHAR(45) NOT NULL,
-destination VARCHAR(45) NOT NULL,
-PRIMARY KEY (train_id),
-COMMENT='Strong entity');
+destination VARCHAR(45) NOT NULL)
+COMMENT='Strong entity';
 
 
 CREATE TABLE IF NOT EXISTS customer (
-customer_id INT NOT NULL,
+customer_id INT NOT NULL PRIMARY KEY,
 first_name VARCHAR(45) NOT NULL,
 last_name VARCHAR(45) NOT NULL,
 age INT NOT NULL,
-contact_no VARCHAR(45) NULL,
-PRIMARY KEY (customer_id),
-COMMENT='Strong entity');
+contact_no VARCHAR(45) NULL)
+COMMENT='Strong entity';
 
 
 CREATE TABLE IF NOT EXISTS ticket (
-ticket_id INT NOT NULL,
+ticket_id INT NOT NULL PRIMARY KEY,
 ticket_price INT NOT NULL,
 reserved TINYINT(1) NOT NULL DEFAULT 1,
-train_id INT NULL,
-customer_id INT NULL,
+train_id INT NULL REFERENCES train (train_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+customer_id INT NULL REFERENCES customer (customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
 from_ VARCHAR(45) NOT NULL,
-to_ VARCHAR(45) NOT NULL,
-PRIMARY KEY (ticket_id),
-FOREIGN KEY (customer_id)
-REFERENCES customer (customer_id)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-FOREIGN KEY (train_id)
-REFERENCES train (train_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
-COMMENT='Weak entity');
+to_ VARCHAR(45) NOT NULL)
+COMMENT='Weak entity';
 
 
 delimiter |
