@@ -9,6 +9,7 @@ employee_salary VARCHAR(45) NULL,
 employee_contactno VARCHAR(45) NULL,
 employee_projectid INT NOT NULL,
 report_to VARCHAR(45) NULL,
+d_id INT NOT NULL,
 PRIMARY KEY (employee_id),
 FOREIGN KEY (employee_projectid)
 REFERENCES project(project_id)
@@ -17,6 +18,10 @@ ON UPDATE CASCADE,
 FOREIGN KEY (report_to)
 REFERENCES designation(eid)
 ON DELETE CASCADE
+ON UPDATE CASCADE,
+FOREIGN KEY (d_id)
+REFERENCES designation(designation_id)
+ON DELETE RESTRICT
 ON UPDATE CASCADE,
 COMMENT='Weak entity');
 
@@ -29,14 +34,10 @@ COMMENT='Strong entity');
 
 
 CREATE TABLE IF NOT EXISTS designation (
-eid INT NOT NULL,
+did INT NOT NULL,
 designation VARCHAR(45) NULL,
 rank VARCHAR(45) NULL,
-PRIMARY KEY (eid),
-FOREIGN KEY (employee_id)
-REFERENCES `Proj&emp`.`employee` (`employee_id`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION,
+PRIMARY KEY (did),
 COMMENT='Strong entity');
 
 
