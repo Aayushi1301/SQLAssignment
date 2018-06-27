@@ -1,4 +1,4 @@
-CREATE DATABASE Cab_Rental;
+CREATE DATABASE IF NOT EXISTS Cab_Rental;
 USE Cab_Rental ;
 
 CREATE TABLE IF NOT EXISTS Cab (
@@ -37,13 +37,21 @@ drop_ VARCHAR(45) NULL)
 COMMENT='Weak entity';
 
 
-CREATE TRIGGER delete_from_booking 
-    ON  booking
-    INSTEAD OF DELETE
-AS 
-BEGIN
-    RAISERROR ('Cannot Delete Records from booking', 16, 1)
-END
 
+
+DELIMITER $$
+
+CREATE TRIGGER on_delete_booking
+BEFORE DELETE
+ON booking
+FOR EACH ROW
+BEGIN
+  
+    PRINT 'cannot_delete_error'; 
+  
+END
+$$
+
+DELIMITER ;
 
 
